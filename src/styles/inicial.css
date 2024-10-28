@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: #f0f0f0;
+    max-width: 800px;
+    width: 100%;
+}
+
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: normal;
+}
+
+main {
+    padding: 20px;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cards-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    flex: 1;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 230px;
+}
+
+.barber-card {
+    background-color: #000;
+    color: #fff;
+}
+
+.client-card {
+    background-color: #fff;
+    color: #000;
+}
+
+.card p {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 2px solid;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 12px;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.barber-card .btn {
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.client-card .btn-solid {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+.client-card .btn-outline {
+    background-color: transparent;
+    border-color: #000;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+
+    .card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .description, .card p {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
+}

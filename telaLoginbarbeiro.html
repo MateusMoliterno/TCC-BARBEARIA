@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Express - Login</title>
+    <link rel="stylesheet" href="./src/styles/TeladeLogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <h1>Barber Express</h1>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input id="login-email" type="email" placeholder="Digite seu email">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input id="login-password" type="password" placeholder="Digite sua senha">
+                </div>
+                <button type="submit">ENTRAR</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js';
+
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "SUA_API_KEY",
+            authDomain: "barbearia-3cc36.firebaseapp.com",
+            projectId: "barbearia-3cc36",
+        };
+
+        // Inicializando o app
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const useCollection = collection(db, 'cadastroBarbeiro');
+
+        document.getElementById('login-form').onsubmit = async function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const querySnapshot = await getDocs(useCollection);
+                let userFound = false;
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (data.email === email && data.password === password) {
+                        userFound = true;
+                        // Salvar o nome do usuário logado no localStorage
+                        localStorage.setItem('nomeUsuario', data.name);
+                        window.location.href = "telaPrincipal.html"; // Altere para a sua tela principal
+                    }
+                });
+
+                if (!userFound) {
+                    document.getElementById('menssagem').textContent = 'Email ou senha incorretos';
+                }
+            } catch (error) {
+                console.error("Erro ao buscar dados: ", error);
+                document.getElementById('menssagem').textContent = 'Erro ao efetuar login';
+            }
+        };
+
+    </script>
+</body>
+</html>

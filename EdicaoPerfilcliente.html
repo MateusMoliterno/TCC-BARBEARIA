@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles/EdicaoPerfil.css">
+    <title>Edição de Perfil</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Perfil</h1>
+        <div class="profile-image">
+            <img src="default-profile.png" alt="Imagem de Perfil" id="profileImg">
+            <input type="file" id="upload" accept="image/*">
+        </div>
+        <form>
+            <label for="age">Idade:</label>
+            <input type="number" id="age" placeholder="Digite sua idade">
+
+            <label for="location">Localização:</label>
+            <input type="text" id="location" placeholder="Digite sua localização">
+
+            <!-- Botão para sals var as alteraçõe-->
+            <button type="submit">Salvar</button>
+        </form>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js';
+
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCFRb6MeG4aesTba4Chge7l37TjGPBCDVI",
+            authDomain: "barbearia-3cc36.firebaseapp.com",
+            projectId: "barbearia-3cc36",
+        };
+
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const useCollection = collection(db, 'edicaoPerfil');
+
+        document.getElementById('registration-form').onsubmit = async function(event) {
+            event.preventDefault();
+            
+            const age = document.getElementById('age').value;
+            const location = document.getElementById('location').value;
+
+        
+            try {
+                await addDoc(useCollection, {
+                    idade: age,
+                    localizacao: location,
+                });
+                document.getElementById('menssagem').textContent = 'Cadastro realizado com sucesso';
+                document.getElementById('registration-form').reset();
+            } catch (error) {
+                document.getElementById('menssagem').textContent = 'Erro ao cadastrar: ' + error.message;
+            }
+        };
+
+
+        const get = async () => {
+            try {
+                const dados = await getDocs(useCollection);
+                dados.forEach(doc => {
+                    console.log(doc.id, " => ", doc.data());
+                });
+            } catch (error) {
+                console.error("Erro ao buscar dados: ", error);
+            }
+        };
+
+        get();
+    </script>
+
+</body>
+</html>

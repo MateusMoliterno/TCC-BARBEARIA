@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Express - Login</title>
+    <link rel="stylesheet" href="./src/styles/cadastrobarbeiro.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="left-side">
+                <h1>Barber Express</h1>
+                <p>Entre e comece a fazer a sua clientela agora mesmo</p>
+                <button class="btn-enter">ENTRAR</button>
+                <a href="#" class="forgot-password">Esqueci a senha</a>
+            </div>
+            <div class="right-side">
+                <h2>Crie a sua conta</h2>
+                <form id="registration-form">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Digite o seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Digite seu email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Digite sua senha" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn-barber">Cadastrar</button>
+                    </div>
+                </form>
+                <div id="menssagem"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js';
+
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCFRb6MeG4aesTba4Chge7l37TjGPBCDVI",
+            authDomain: "barbearia-3cc36.firebaseapp.com",
+            projectId: "barbearia-3cc36",
+        };
+
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const useCollection = collection(db, 'cadastroBarbeiro');
+
+        document.getElementById('registration-form').onsubmit = async function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+        
+            try {
+                await addDoc(useCollection, {
+                    name: name,
+                    email: email,
+                    password: password,
+                });
+                document.getElementById('menssagem').textContent = 'Cadastro realizado com sucesso';
+                document.getElementById('registration-form').reset();
+            } catch (error) {
+                document.getElementById('menssagem').textContent = 'Erro ao cadastrar: ' + error.message;
+            }
+        };
+
+
+        const get = async () => {
+            try {
+                const dados = await getDocs(useCollection);
+                dados.forEach(doc => {
+                    console.log(doc.id, " => ", doc.data());
+                });
+            } catch (error) {
+                console.error("Erro ao buscar dados: ", error);
+            }
+        };
+
+        get();
+    </script>
+</body>
+</html>
+
+

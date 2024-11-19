@@ -25,6 +25,8 @@
         </div>
     </div>
 
+
+
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js';
         import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js';
@@ -56,8 +58,8 @@
                     if (data.email === email && data.password === password) {
                         userFound = true;
                         // Salvar o nome do usuário logado no localStorage
-                        localStorage.setItem('nomeUsuario', data.name);
-                        window.location.href = "telaPrincipal.html"; // Altere para a sua tela principal
+                        localStorage.setItem('nomeBarbeiro', data.name);
+                        window.location.href = "./TelaPrincipalBarbeiro.html"; // Altere para a sua tela principal
                     }
                 });
 
@@ -69,7 +71,9 @@
                 document.getElementById('menssagem').textContent = 'Erro ao efetuar login';
             }
         };
-
     </script>
 </body>
 </html>
+</body>
+</html>
+    

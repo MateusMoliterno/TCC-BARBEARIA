@@ -1,9 +1,9 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barber Express - Search</title>
+    <title>Barber Express - Tela Principal</title>
     <link rel="stylesheet" href="./src/styles/TelaPrincipal.css">
 </head>
 <body>
@@ -12,6 +12,7 @@
             <aside class="sidebar">
                 <div class="profile-image"></div>
                 <h2 class="Nome"></h2>
+                <p class="idade"></p>
                 <p class="location"></p>
                 <div class="rating">
                     <span class="star"></span>
@@ -20,84 +21,11 @@
                     <span class="star"></span>
                     <span class="star"></span>
                 </div>
-                <p class="rating-text">Numero de estrelas condiz com a satisfação dos clientes</p>
                 <div class="action-buttons">
-                    <button class="btn-outline">Editar perfil</button>
-                    <button class="btn-outline">Contatos</button>
-                    <button class="btn-outline">conversas</button>
-                    <button class="btn-white">LOGOUT</button>
-                </div>
-            </aside>
-            <main class="main-content">
-                <div class="search-bar">
-                    <button class="btn-filter">Filtro</button>
-                    <button class="btn-search">Pesquisar</button>
-                </div>
-                <p class="results-label">Resultados:</p>
-                <div class="results-list">
-                    <Barber Result Card 1 -->
-                    <!-- <div class="barber-card">
-                        <div class="barber-image"></div>
-                        <div class="barber-info">
-                            <div class="barber-header">
-                                <h3>Rodrigo Deiró</h3>
-                                <div class="rating">★★★★★</div>
-                            </div>
-                            <p class="region">Região: <span>Salvador Bahia</span></p>
-                            <div class="skills">
-                                <p>Habilidades:</p>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Sombrancelha</span>
-                                    <span class="skill-tag">Corte com tesoura</span>
-                                    <span class="skill-tag">Corte com navalha</span>
-                                    <span class="skill-tag">Corte com máquina</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- Additional barber cards would follow the same structure -->
-                <!-- </div>
-            </main>
-        </div>
-    </div> -->
-
-
-
-
-    
-<!-- </body>
-</html> --> 
-
-
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barber Express - Search</title>
-    <link rel="stylesheet" href="./src/styles/TelaPrincipal.css">
-</head>
-<body>
-    <div class="container">
-        <div class="profile-card">
-            <aside class="sidebar">
-                <div class="profile-image"></div>
-                <h2 class="Nome"></h2> <!-- O nome será exibido aqui -->
-                <p class="location"></p> <!-- A localização será exibida aqui -->
-                <div class="rating">
-                    <span class="star"></span>
-                    <span class="star"></span>
-                    <span class="star"></span>
-                    <span class="star"></span>
-                    <span class="star"></span>
-                </div>
-                <p class="rating-text">Número de estrelas condiz com a satisfação dos clientes</p>
-                <div class="action-buttons">
-                    <button class="btn-outline">Editar perfil</button>
+                    <a href="./EdicaoPerfilcliente.html"><button class="btn-outline">Editar perfil</button></a>
                     <button class="btn-outline">Contatos</button>
                     <button class="btn-outline">Conversas</button>
-                    <button class="btn-white">LOGOUT</button>
+                    <button class="btn-white" id="logout-btn">LOGOUT</button>
                 </div>
             </aside>
             <main class="main-content">
@@ -106,52 +34,52 @@
                     <button class="btn-search">Pesquisar</button>
                 </div>
                 <p class="results-label">Resultados:</p>
-                <div class="results-list">
-                    <!-- Barber Result Card -->
-                </div>
+                <div class="results-list"></div>
             </main>
+        </div>
+
+        <!-- Perfil do Barbeiro -->
+        <div class="perfildebarbeiro">
+            <!-- As informações serão carregadas aqui -->
         </div>
     </div>
 
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js';
-        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js';
 
-        // Configuração do Firebase
-        const firebaseConfig = {
-            apiKey: "SUA_API_KEY",
-            authDomain: "barbearia-3cc36.firebaseapp.com",
-            projectId: "barbearia-3cc36",
-        };
-
-        // Inicializando o app
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Função para carregar o nome e a localização do usuário logado
         const carregarDadosUsuario = () => {
-            // Carregando o nome do usuário do localStorage
-            const nomeUsuario = localStorage.getItem('nomeUsuario');
-            const localizacaoUsuario = localStorage.getItem('localizacaoUsuario'); // Nova linha para localização
+            const nomeUsuario = localStorage.getItem('nomeUsuario'); // Nome do usuário, caso exista
+            const idadeUsuario = localStorage.getItem('idadeUsuario');
+            const localizacaoUsuario = localStorage.getItem('localizacaoUsuario');
 
-            // Exibindo o nome do usuário
-            if (nomeUsuario) {
-                document.querySelector('.Nome').textContent = nomeUsuario;
-            } else {
-                console.error("Nenhum nome de usuário encontrado no localStorage");
-            }
-
-            // Exibindo a localização do usuário
-            if (localizacaoUsuario) {
-                document.querySelector('.location').textContent = localizacaoUsuario;
-            } else {
-                document.querySelector('.location').textContent = 'Localização não definida'; // Caso não haja localização armazenada
-            }
+            document.querySelector('.Nome').textContent = nomeUsuario || 'Usuário não identificado';
+            document.querySelector('.idade').textContent = idadeUsuario 
+                ? `Idade: ${idadeUsuario}` 
+                : 'Idade não definida';
+            document.querySelector('.location').textContent = localizacaoUsuario 
+                ? `Localização: ${localizacaoUsuario}` 
+                : 'Localização não definida';
         };
 
-        // Chama a função para exibir os dados do usuário
+        // Função para carregar informações do barbeiro
+        const carregarPerfilBarbeiro = () => {
+            // Recuperar dados do localStorage
+            const nomeBarbeiro = localStorage.getItem('nomeBarbeiro') || 'Barbeiro não identificado';
+            const idadeBarbeiro = localStorage.getItem('idadeBarbeiro') || 'Idade não informada';
+            const localizacaoBarbeiro = localStorage.getItem('localizacaoBarbeiro') || 'Localização não informada';
+
+            // Inserir as informações na div .perfildebarbeiro
+            const perfilDiv = document.querySelector('.perfildebarbeiro');
+            perfilDiv.innerHTML = `
+                <h3>Perfil do Barbeiro</h3>
+                <p><strong>Nome:</strong> ${nomeBarbeiro}</p>
+                <p><strong>Idade:</strong> ${idadeBarbeiro}</p>
+                <p><strong>Localização:</strong> ${localizacaoBarbeiro}</p>
+            `;
+        };
+
+        // Executar ao carregar a página
         carregarDadosUsuario();
+        carregarPerfilBarbeiro();
     </script>
 </body>
 </html>
-

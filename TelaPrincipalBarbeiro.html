@@ -1,0 +1,135 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Express - Search</title>
+    <link rel="stylesheet" href="./src/styles/TelaPrincipal.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <aside class="sidebar">
+                <div class="profile-image"></div>
+                <h2 class="Nome"></h2>
+                <p class="location"></p>
+                <div class="rating">
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </div>
+                <p class="rating-text">Numero de estrelas condiz com a satisfação dos clientes</p>
+                <div class="action-buttons">
+                    <button class="btn-outline">Editar perfil</button>
+                    <button class="btn-outline">Contatos</button>
+                    <button class="btn-outline">conversas</button>
+                    <button class="btn-white">LOGOUT</button>
+                </div>
+            </aside>
+            <main class="main-content">
+                <div class="search-bar">
+                    <button class="btn-filter">Filtro</button>
+                    <button class="btn-search">Pesquisar</button>
+                </div>
+                <p class="results-label">Resultados:</p>
+                <div class="results-list">
+                    <Barber Result Card 1 -->
+                    <!-- <div class="barber-card">
+                        <div class="barber-image"></div>
+                        <div class="barber-info">
+                            <div class="barber-header">
+                                <h3>Rodrigo Deiró</h3>
+                                <div class="rating">★★★★★</div>
+                            </div>
+                            <p class="region">Região: <span>Salvador Bahia</span></p>
+                            <div class="skills">
+                                <p>Habilidades:</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Sombrancelha</span>
+                                    <span class="skill-tag">Corte com tesoura</span>
+                                    <span class="skill-tag">Corte com navalha</span>
+                                    <span class="skill-tag">Corte com máquina</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Additional barber cards would follow the same structure -->
+                <!-- </div>
+            </main>
+        </div>
+    </div> -->
+
+
+
+
+    
+<!-- </body>
+</html> --> 
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Express - Tela Principal</title>
+    <link rel="stylesheet" href="./src/styles/TelaPrincipal.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <aside class="sidebar">
+                <div class="profile-image"></div>
+                <h2 class="Nome"></h2>
+                <p class="idade"></p>
+                <p class="location"></p>
+                <div class="rating">
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </div>
+                <!-- <p class="rating-text">Número de estrelas condiz com a satisfação dos clientes</p> -->
+                <div class="action-buttons">
+                    <a href="./Edicaoperfilbarbeiro.html"><button class="btn-outline">Editar perfil</button></a>
+                    <button class="btn-outline">Contatos</button>
+                    <button class="btn-outline">Conversas</button>
+                    <button class="btn-white" id="logout-btn">LOGOUT</button>
+                </div>
+            </aside>
+            <main class="main-content">
+                <div class="search-bar">
+                    <button class="btn-filter">Filtro</button>
+                    <button class="btn-search">Pesquisar</button>
+                </div>
+                <p class="results-label">Resultados:</p>
+                <div class="results-list"></div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module">
+        const carregarDadosUsuario = () => {
+            const nomeUsuario = localStorage.getItem('nomeBarbeiro'); // Nome do usuário, caso exista
+            const idadeUsuario = localStorage.getItem('idadeBarbeiro');
+            const localizacaoUsuario = localStorage.getItem('localizacaoBarbeiro');
+
+            document.querySelector('.Nome').textContent = nomeUsuario || 'Usuário não identificado';
+            document.querySelector('.idade').textContent = idadeUsuario 
+                ? `Idade: ${idadeUsuario}` 
+                : 'Idade não definida';
+            document.querySelector('.location').textContent = localizacaoUsuario 
+                ? `Localização: ${localizacaoUsuario}` 
+                : 'Localização não definida';
+        };
+
+        carregarDadosUsuario();
+    </script>
+</body>
+</html>
+
+

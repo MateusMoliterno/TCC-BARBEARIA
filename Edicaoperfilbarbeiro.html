@@ -119,7 +119,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const useCollection = collection(db, 'edicaoPerfil');
+        const useCollection = collection(db, 'edicaoPerfilbarbeiro');
 
         document.getElementById('registration-form').onsubmit = async function(event) {
             event.preventDefault();
@@ -135,11 +135,11 @@
                 });
 
                 // Salvar dados no localStorage
-                localStorage.setItem('idadeUsuario', age);
-                localStorage.setItem('localizacaoUsuario', location);
+                localStorage.setItem('idadeBarbeiro', age);
+                localStorage.setItem('localizacaoBarbeiro', location);
 
                 // Redirecionar para a tela principal
-                window.location.href = './TelaPrincipal.html';
+                window.location.href = './TelaPrincipalBarbeiro.html';
             } catch (error) {
                 document.getElementById('mensagem').textContent = 'Erro ao salvar: ' + error.message;
             }
